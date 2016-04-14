@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-04-14 17:12:22
+Date: 2016-04-14 21:08:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,13 +24,12 @@ CREATE TABLE `quiz` (
   `nom_quiz` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `nb_questions` int(11) NOT NULL,
-  `lien` varchar(255) NOT NULL,
   PRIMARY KEY (`quiz_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quiz
 -- ----------------------------
-INSERT INTO `quiz` VALUES ('1', 'Les Maths', 'Un Quiz sur les maths ! Les additions, multiplications, soustraction, ..', '4', 'maths.php');
-INSERT INTO `quiz` VALUES ('2', 'Les Animaux', 'Un Quiz sur les animaux ! Les chiens, chats, lapins, ..', '5', 'animaux.php');
-INSERT INTO `quiz` VALUES ('3', 'Les Montagnes', 'Un Quiz sur les montagnes ! Les Alpes, le Mont-Blanc, les Voges, .', '6', 'montagnes.php');
+INSERT INTO `quiz` VALUES ('1', 'Les Maths', 'Un Quiz sur les maths ! Les additions, multiplications, soustraction, ..', '4');
+INSERT INTO `quiz` VALUES ('2', 'Les Animaux', 'Un Quiz sur les animaux ! Les chiens, chats, lapins, ..', '5');
+INSERT INTO `quiz` VALUES ('3', 'Les Montagnes', 'Un Quiz sur les montagnes ! Les Alpes, le Mont-Blanc, les Voges, .', '6');
