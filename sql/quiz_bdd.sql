@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-04-14 16:58:52
+Date: 2016-04-14 17:02:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,5 +32,5 @@ CREATE TABLE `quiz` (
 -- Records of quiz
 -- ----------------------------
 INSERT INTO `quiz` VALUES ('1', 'Les Maths', 'Un Quiz sur les maths ! Les additions, multiplications, soustraction, ..', '4', 'maths.php');
-INSERT INTO `quiz` VALUES ('2', 'Les Animaux', 'Un Quiz sur les maths ! Les additions, multiplications, soustraction, ..', '5', 'animaux.php');
-INSERT INTO `quiz` VALUES ('3', 'Les Montagnes', 'Un Quiz sur les maths ! Les additions, multiplications, soustraction, ..', '6', 'montagnes.php');
+INSERT INTO `quiz` VALUES ('2', 'Les Animaux', 'Un Quiz sur les animaux ! Les chiens, chats, lapins, ..', '5', 'animaux.php');
+INSERT INTO `quiz` VALUES ('3', 'Les Montagnes', 'Un Quiz sur les montagnes ! Les Alpes, le Mont-Blanc, les Voges, .', '6', 'montagnes.php');
