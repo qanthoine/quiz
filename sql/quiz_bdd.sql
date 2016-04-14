@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-04-14 17:02:04
+Date: 2016-04-14 17:12:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,13 +20,13 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `quiz`;
 CREATE TABLE `quiz` (
-  `quiz_id` int(11) NOT NULL,
+  `quiz_id` int(11) NOT NULL AUTO_INCREMENT,
   `nom_quiz` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `nb_questions` int(11) NOT NULL,
   `lien` varchar(255) NOT NULL,
   PRIMARY KEY (`quiz_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quiz
