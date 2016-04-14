@@ -20,11 +20,10 @@ $req = $bdd->query('SELECT * FROM quiz ORDER BY quiz_id');
             $nom_quiz = htmlspecialchars($quiz['nom_quiz']);
             $description = htmlspecialchars($quiz['description']);
             $nb_questions = htmlspecialchars($quiz['nb_questions']);
-            $lien = htmlspecialchars($quiz['lien']);
             ?>
     	    <h2><?php echo $nom_quiz;?> (<?php echo $nb_questions;?> questions)</h2>
     	    <?php echo $description;?><br><br>
-    	    <a href="<?php echo $lien;?>">Lancer le Quiz !</a>
+    	    <a href="quiz.php?quiz=<?php echo $quiz_id;?>">Lancer le Quiz !</a>
             <?php
         }
         $req->closeCursor();
