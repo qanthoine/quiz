@@ -18,7 +18,5 @@
     	<h2>Les Montagnes</h2>
     	Un Quiz sur les montagnes ! Les Alpes, le Mont-Blanc, les Voges, ..<br><br>
     	<a href="montagnes.php">Lancer le Quiz !</a>
-
-
     </body>
 </html>
