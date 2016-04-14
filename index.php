@@ -1,3 +1,7 @@
+<?php
+include('bdd.php');
+$req = $bdd->query('SELECT * FROM quiz ORDER BY quiz_id');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,14 +13,21 @@
     	<center>
     		<h1>Mes Quiz</h1>
     	</center>
-    	<h2>Les Maths</h2>
-    	Un Quiz sur les maths ! Les additions, multiplications, soustraction, ..<br><br>
-    	<a href="maths.php">Lancer le Quiz !</a>
-    	<h2>Les Animaux</h2>
-    	Un Quiz sur les animaux ! Les chiens, chats, lapins, ..<br><br>
-    	<a href="animaux.php">Lancer le Quiz !</a>
-    	<h2>Les Montagnes</h2>
-    	Un Quiz sur les montagnes ! Les Alpes, le Mont-Blanc, les Voges, ..<br><br>
-    	<a href="montagnes.php">Lancer le Quiz !</a>
+        <?php
+        while ($quiz = $req->fetch()) 
+        {
+            $quiz_id = htmlspecialchars($quiz['quiz_id']);
+            $nom_quiz = htmlspecialchars($quiz['nom_quiz']);
+            $description = htmlspecialchars($quiz['description']);
+            $nb_questions = htmlspecialchars($quiz['nb_questions']);
+            $lien = htmlspecialchars($quiz['lien']);
+            ?>
+    	    <h2><?php echo $nom_quiz;?> (<?php echo $nb_questions;?> questions)</h2>
+    	    <?php echo $description;?><br><br>
+    	    <a href="<?php echo $lien;?>">Lancer le Quiz !</a>
+            <?php
+        }
+        $req->closeCursor();
+        ?>
     </body>
 </html>
