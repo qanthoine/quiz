@@ -1,12 +1,12 @@
 <?php
 include('bdd.php');
-if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
+//Recupération du nom du Quiz
+$req_n = $bdd->query('SELECT * FROM quiz WHERE quiz_id = '.$_GET['quiz'].'');
+$quiz_n = $req_n->fetch();
+if(isset($_GET['quiz']) AND $_GET['quiz'] > 0 AND $quiz_n)
 {
     $id_quiz = htmlspecialchars($_GET['quiz']);
 
-    //Recupération du nom du Quiz
-    $req_n = $bdd->query('SELECT nom_quiz FROM quiz WHERE quiz_id = '.$id_quiz.'');
-    $quiz_n = $req_n->fetch();
     $nom_quiz = htmlspecialchars($quiz_n['nom_quiz']);
     $req_n->closeCursor();
 
