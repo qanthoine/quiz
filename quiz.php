@@ -1,6 +1,6 @@
 <?php
 include('bdd.php');
-//Recupération du nom du Quiz
+//Recupération du nom du Quiz et verification si le Quiz éxiste
 $req_n = $bdd->query('SELECT * FROM quiz WHERE quiz_id = '.$_GET['quiz'].'');
 $quiz_n = $req_n->fetch();
 if(isset($_GET['quiz']) AND $_GET['quiz'] > 0 AND $quiz_n)
@@ -44,6 +44,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0 AND $quiz_n)
             			{
                 			$reponse_id = htmlspecialchars($quiz_r['id_reponse']);
                 			$reponse = htmlspecialchars($quiz_r['reponse']);
+
                 			?>
                 			<input type="radio" name="<?php echo $question_id;?>" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
                 			<?php
@@ -52,6 +53,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0 AND $quiz_n)
             		}
             		$req->closeCursor();
             		?>
+                    <input type="hidden" name="id_quiz" value="<?php echo $id_quiz;?>" />
     	    		<br><input type="submit" value="Valider" />
     			</p>
     		</form>
