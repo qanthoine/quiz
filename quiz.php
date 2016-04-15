@@ -3,19 +3,29 @@ include('bdd.php');
 if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
 {
     $id_quiz = htmlspecialchars($_GET['quiz']);
-    $req = $bdd->query('SELECT id_question, question FROM quiz_questions WHERE quiz = '.$id_quiz.' ORDER BY id_question');
+
+    //Recupération du nom du Quiz
+    $req_n = $bdd->query('SELECT nom_quiz FROM quiz WHERE quiz_id = '.$id_quiz.'');
+    $quiz_n = $req_n->fetch();
+    $nom_quiz = htmlspecialchars($quiz_n['nom_quiz']);
+
+    //Recupération des Questions
+    $req = $bdd->query('SELECT id_question, question FROM quiz_questions WHERE quiz_id = '.$id_quiz.'');
+
+    //Préparation de la Recupération des Réponses
     $req_s = $bdd->prepare('SELECT id_reponse, reponse FROM quiz_reponses WHERE id_question = :question_id AND quiz = '.$id_quiz.' ORDER BY id_reponse');
     ?>
+    
     <!DOCTYPE html>
     <html>
         <head>
             <meta charset="utf-8" />
-            <title>Les Maths</title>
+            <title><?php echo $nom_quiz;?></title>
         </head>
 
         <body>
         	<center>
-        		<h1>Les Maths</h1>
+        		<h1><?php echo $nom_quiz;?></h1>
         	</center>
     		<form action="quiz_post.php" method="post">
     			<p>
