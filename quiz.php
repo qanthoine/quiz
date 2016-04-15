@@ -8,6 +8,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
     $req_n = $bdd->query('SELECT nom_quiz FROM quiz WHERE quiz_id = '.$id_quiz.'');
     $quiz_n = $req_n->fetch();
     $nom_quiz = htmlspecialchars($quiz_n['nom_quiz']);
+    $req_n->closeCursor();
 
     //Recupération des Questions
     $req = $bdd->query('SELECT id_question, question FROM quiz_questions WHERE quiz_id = '.$id_quiz.'');
@@ -15,7 +16,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
     //Préparation de la Recupération des Réponses
     $req_s = $bdd->prepare('SELECT id_reponse, reponse FROM quiz_reponses WHERE id_question = :question_id AND quiz = '.$id_quiz.' ORDER BY id_reponse');
     ?>
-    
+
     <!DOCTYPE html>
     <html>
         <head>
