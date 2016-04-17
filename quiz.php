@@ -46,7 +46,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0 AND $quiz_n)
                 			$reponse = htmlspecialchars($quiz_r['reponse']);
 
                 			?>
-                			<input type="radio" name="<?php echo $question_id;?>" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
+                			<input type="radio" name="input[<?php echo $question_id;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
                 			<?php
             			}
             			$req_s->closeCursor();
