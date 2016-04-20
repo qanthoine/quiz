@@ -1,5 +1,8 @@
 <?php
 include('bdd.php');
+session_start();
+$_SESSION = array();
+session_destroy();
 $req = $bdd->query('SELECT * FROM quiz ORDER BY quiz_id');
 ?>
 <!DOCTYPE html>
