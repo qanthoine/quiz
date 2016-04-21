@@ -13,7 +13,8 @@ if(!empty($_POST['id_quiz']))
 	if(count($_POST['input']) == $nb_q)
 	{
 		$_SESSION['points'] = 0;
-		$points_q = 100 / $nb_q;	
+		$points_q = 100 / $nb_q;
+		$points_r = round($points_q, 2);
 		$i = 1;
 		for($_POST['input'][$i];$i <= $nb_q;$i++)
 		{
@@ -26,7 +27,7 @@ if(!empty($_POST['id_quiz']))
 			$points = $_SESSION['points'];
 			if($resultat_req['resultat'] == 1)
 			{
-				$_SESSION['points'] = $points + $points_q;
+				$_SESSION['points'] = $points + $points_r;
 				$_SESSION['question'][$id_quest] = $id_input;
 			}
 			else
@@ -36,14 +37,14 @@ if(!empty($_POST['id_quiz']))
 			}	
 		}
 		$_SESSION['fin'] = 1;
-		header('Location: correction.php?quiz='.$id_quiz);
+		header('Location: ../correction.php?quiz='.$id_quiz);
 	}
 	else
 	{
-		header('Location: quiz.php?quiz='.$id_quiz);
+		header('Location: ../quiz.php?quiz='.$id_quiz.'&erreur=2');
 	}
 }
 else
 {
-	header('Location: quiz.php?quiz='.$id_quiz);
+	header('Location: ../quiz.php?quiz='.$id_quiz.'&erreur=1');
 }

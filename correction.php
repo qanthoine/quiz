@@ -1,5 +1,5 @@
 <?php
-include('bdd.php');
+include('includes/bdd.php');
 session_start();
 if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 {
@@ -27,64 +27,76 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 	        	<head>
 	            	<meta charset="utf-8" />
 	            	<title>Correction</title>
+        			<link rel="stylesheet" type="text/css" href="styles/style.css"/>
 	        	</head>
 
 	        	<body>
 	        		<center>
 	        			<h1>Correction du Quiz : <?php echo $nom_quiz;?></h1>
 	        			<h2>Votre Score : <?php echo $_SESSION['points'];?>%</h2>
+		    			<p>
+		            		<?php
+		            		while ($quiz_q = $req->fetch()) 
+		            		{
+		            			?>
+		            			<div class="quiz_question">
+		            				<?php
+			                		$question_id = htmlspecialchars($quiz_q['id_question']);
+			                		$question = htmlspecialchars($quiz_q['question']);
+			                		?>
+			                		<div id="titre_question">
+			        	    			<h2>Question n°<?php echo $question_id;?></h2>
+			        	    		</div>
+			        	    		<div id="question_question">    
+			        	    			<?php echo $question;?><br>
+			        	    		</div>
+			                		<?php
+			                		$req_s->bindParam('question_id',$question_id,PDO::PARAM_INT);
+			                		$req_s->bindParam('id',$quiz_id,PDO::PARAM_INT);
+			                		$req_s->execute();
+			            			while ($quiz_r = $req_s->fetch()) 
+			            			{
+			                			$reponse_id = htmlspecialchars($quiz_r['id_reponse']);
+			                			$reponse = htmlspecialchars($quiz_r['reponse']);
+			                			$resultat = htmlspecialchars($quiz_r['resultat']);
+			                			if($resultat == 1)
+			                			{
+			                				$logo = 'ok.jpg';             				
+			                			}
+			                			else
+			                			{
+			                				$logo = 'croix.jpg';
+			                			}
+			                			if($_SESSION['question'][$question_id] == $reponse_id)
+			                			{
+			                				$text = "(Votre choix)";
+			                			}
+			                			else
+			                			{
+			                				$text = "";
+			                			}
+			                			?>
+			                			<div id="reponse_question">
+			                				<img src="img/<?php echo $logo;?>" alt="<?php echo $logo;?>" width="15"/>         			
+			                				<?php
+			                				echo $reponse." ".$text;
+			                				?>
+			                			</div>
+			                			<?php	
+			            			}
+			            			$req_s->closeCursor();
+			            			?>
+		            			</div>
+		            			<?php
+		            		}
+		            		?>
+		            		<br>
+		                	<a href="index.php"> <input type="button" value="Retour à la liste des Quiz">
+		                	<?php
+		            		$req->closeCursor();
+		            		?>
+		    			</p>
 	        		</center>
-	    			<p>
-	            		<?php
-	            		while ($quiz_q = $req->fetch()) 
-	            		{
-	                		$question_id = htmlspecialchars($quiz_q['id_question']);
-	                		$question = htmlspecialchars($quiz_q['question']);
-	                		?>
-	        	    		<h2>Question n°<?php echo $question_id;?></h2>
-	        	    		<?php echo $question;?><br>
-	                		<?php
-	                		$req_s->bindParam('question_id',$question_id,PDO::PARAM_INT);
-	                		$req_s->bindParam('id',$quiz_id,PDO::PARAM_INT);
-	                		$req_s->execute();
-	            			while ($quiz_r = $req_s->fetch()) 
-	            			{
-	                			$reponse_id = htmlspecialchars($quiz_r['id_reponse']);
-	                			$reponse = htmlspecialchars($quiz_r['reponse']);
-	                			$resultat = htmlspecialchars($quiz_r['resultat']);
-	                			if($resultat == 1)
-	                			{
-	                				$logo = 'ok.jpg';             				
-	                			}
-	                			else
-	                			{
-	                				$logo = 'croix.jpg';
-	                			}
-	                			if($_SESSION['question'][$question_id] == $reponse_id)
-	                			{
-	                				$text = "(Votre choix)";
-	                			}
-	                			else
-	                			{
-	                				$text = "";
-	                			}
-	                			?>
-	                			<img src="img/<?php echo $logo;?>" alt="<?php echo $logo;?>" width="15"/>
-	                			<?php
-	                			echo $reponse." ".$text;
-	                			?>
-	                			<br>
-	                			<?php	
-	            			}
-	            			$req_s->closeCursor();
-	            		}
-	            		?>
-	            		<br>
-	                	<a href="index.php"> <input type="button" value="Retour à la liste des Quiz">
-	                	<?php
-	            		$req->closeCursor();
-	            		?>
-	    			</p>
 	        	</body>
 	    	</html>
 	    	<?php

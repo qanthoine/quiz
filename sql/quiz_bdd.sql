@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-04-14 21:08:29
+Date: 2016-04-21 17:41:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,8 +24,9 @@ CREATE TABLE `quiz` (
   `nom_quiz` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `nb_questions` int(11) NOT NULL,
-  PRIMARY KEY (`quiz_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`quiz_id`),
+  UNIQUE KEY `quiz_id` (`quiz_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quiz

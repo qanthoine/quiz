@@ -1,0 +1,44 @@
+.pres_quiz
+{
+	border-radius: 5px;
+	border: 1px solid black;	
+	width: 50%;
+	margin :15px;
+}
+#titre_quiz
+{
+	width: 50%;
+	margin:3px;
+}
+#description_quiz
+{
+	width: 50%;
+	margin:3px;
+}
+#boutton_quiz
+{
+	width: 50%;
+	margin:3px;
+}
+.quiz_question
+{
+	border-radius: 5px;
+	border: 1px solid black;	
+	width: 50%;
+	margin :15px;
+}
+#titre_question
+{
+	width: 50%;
+	margin:3px;
+}
+#question_question
+{
+	width: 50%;
+	margin:3px;
+}
+#reponse_question
+{
+	width: 50%;
+	margin:3px;
+}
