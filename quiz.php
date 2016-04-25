@@ -13,7 +13,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
         $nom_quiz = htmlspecialchars($quiz_n['nom_quiz']);
         $req_n->closeCursor();
         //Recupération des Questions
-        $req = $bdd->prepare('SELECT id_question, question FROM quiz_questions WHERE quiz_id = :id_quiz');
+        $req = $bdd->prepare('SELECT id_question, question, nb_rep FROM quiz_questions WHERE quiz_id = :id_quiz');
         $req->bindParam(':id_quiz',$id_quiz,PDO::PARAM_INT);
         $req->execute();
         //Préparation de la Recupération des Réponses
@@ -60,9 +60,11 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                                     <?php 
                             		$question_id = htmlspecialchars($quiz_q['id_question']);
                             		$question = htmlspecialchars($quiz_q['question']);
+                                    $nb_rep = htmlspecialchars($quiz_q['nb_rep']);
                             		?>
                                     <div id="titre_question">
                     	    		    <h2>Question n°<?php echo $question_id;?></h2>
+                                        <h3>(<?php echo $nb_rep;?> reponses possibles)</h3>
                                     </div>
                                     <div id="question_question">    
                     	    		    <?php echo $question;?><br>
@@ -77,7 +79,21 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
 
                             			?>
                                         <div id="reponse_question">
-                            		        <input type="radio" name="input[<?php echo $question_id;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
+                                            <?php
+                                            if($nb_rep <= 1)
+                                            {
+                                                ?>
+                            		          <input type="radio" name="input[<?php echo $question_id;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
+                                              <?php
+                                            }
+                                            else
+                                            {
+                                                ?>
+                                              <input type="checkbox" name="input[<?php echo $question_id;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
+                                              <?php
+
+                                            }    
+                                              ?>
                                         </div>    
                             			<?php
                         			}
