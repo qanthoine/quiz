@@ -3,6 +3,7 @@ include('includes/bdd.php');
 session_start();
 if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 {
+	unset($_SESSION['fin']);
 	if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
 	{
 		$quiz_id = htmlspecialchars($_GET['quiz']);
@@ -21,6 +22,7 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 	    	$req->execute();
 	    	//Préparation de la Recupération des Réponses
 	    	$req_s = $bdd->prepare('SELECT id_reponse, reponse, resultat FROM quiz_reponses WHERE id_question = :question_id AND quiz_id = :id ORDER BY id_reponse');
+	    	$score = htmlspecialchars($_SESSION['points']);
 	    	?>
 	    	<!DOCTYPE html>
 	    	<html>
@@ -33,7 +35,7 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 	        	<body>
 	        		<center>
 	        			<h1>Correction du Quiz : <?php echo $nom_quiz;?></h1>
-	        			<h2>Votre Score : <?php echo $_SESSION['points'];?>%</h2>
+	        			<h2>Votre Score : <?php echo $score?>%</h2>
 		    			<p>
 		            		<?php
 		            		while ($quiz_q = $req->fetch()) 
@@ -59,6 +61,7 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 			                			$reponse_id = htmlspecialchars($quiz_r['id_reponse']);
 			                			$reponse = htmlspecialchars($quiz_r['reponse']);
 			                			$resultat = htmlspecialchars($quiz_r['resultat']);
+			                			$session_rep = htmlspecialchars($_SESSION['question'][$question_id]);
 			                			if($resultat == 1)
 			                			{
 			                				$logo = 'ok.jpg';             				
@@ -67,7 +70,7 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 			                			{
 			                				$logo = 'croix.jpg';
 			                			}
-			                			if($_SESSION['question'][$question_id] == $reponse_id)
+			                			if($session_rep == $reponse_id)
 			                			{
 			                				$text = "(Votre choix)";
 			                			}
@@ -82,7 +85,7 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 			                				echo $reponse." ".$text;
 			                				?>
 			                			</div>
-			                			<?php	
+			                			<?php
 			            			}
 			            			$req_s->closeCursor();
 			            			?>
