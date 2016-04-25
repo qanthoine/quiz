@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('includes/bdd.php');
 $req = $bdd->query('SELECT * FROM quiz ORDER BY quiz_id');
 ?>
@@ -47,11 +48,28 @@ $req = $bdd->query('SELECT * FROM quiz ORDER BY quiz_id');
                     <div id="description_quiz">
             	       <?php echo $description;?><br><br>
                     </div>
-                    <div id="boutton_quiz">
-            	       <img src="img/ok.jpg" alt="ok.jpg" width="15"/> 
-                       <a href="quiz.php?quiz=<?php echo $quiz_id;?>">Lancer le Quiz !</a> 
-                       <img src="img/ok.jpg" alt="ok.jpg" width="15"/>
-                    </div>
+                    <?php
+                    if(isset($_SESSION['quiz_termine']) AND $_SESSION['quiz_termine'] == $quiz_id)
+                    {  
+                        ?>
+                        <div id="boutton_quiz">
+                           <img src="img/croix.jpg" alt="croix.jpg" width="15"/> 
+                           Quiz terminé ! Score : <?php echo $_SESSION['points'][$quiz_id];?>% 
+                           <img src="img/croix.jpg" alt="croix.jpg" width="15"/>
+                        </div>
+                        <?php                        
+                    }
+                    else
+                    {
+                        ?> 
+                        <div id="boutton_quiz">
+                	       <img src="img/ok.jpg" alt="ok.jpg" width="15"/> 
+                           <a href="quiz.php?quiz=<?php echo $quiz_id;?>">Lancer le Quiz !</a> 
+                           <img src="img/ok.jpg" alt="ok.jpg" width="15"/>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div> 
                 <?php
             }
