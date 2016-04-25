@@ -13,9 +13,12 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
         $nom_quiz = htmlspecialchars($quiz_n['nom_quiz']);
         $req_n->closeCursor();
         //Recupération des Questions
-        $req = $bdd->query('SELECT id_question, question FROM quiz_questions WHERE quiz_id = '.$id_quiz.'');
+        $req = $bdd->prepare('SELECT id_question, question FROM quiz_questions WHERE quiz_id = :id_quiz');
+        $req->bindParam(':id_quiz',$id_quiz,PDO::PARAM_INT);
+        $req->execute();
         //Préparation de la Recupération des Réponses
-        $req_s = $bdd->prepare('SELECT id_reponse, reponse FROM quiz_reponses WHERE id_question = :question_id AND quiz_id = '.$id_quiz.' ORDER BY id_reponse');
+        $req_s = $bdd->prepare('SELECT id_reponse, reponse FROM quiz_reponses WHERE id_question = :question_id AND quiz_id = :id_quiz ORDER BY id_reponse');
+        $req_s->bindParam(':id_quiz',$id_quiz,PDO::PARAM_INT);
         ?>
         <!DOCTYPE html>
         <html>
