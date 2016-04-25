@@ -40,7 +40,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                             }
                             elseif($_GET['erreur'] == 2) 
                             {
-                                echo "Il faut cocher une case par question !";
+                                echo "Il faut cocher au moins une case par question !";
                             }
                             ?>
                         </div>

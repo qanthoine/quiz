@@ -106,15 +106,15 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 		}
 		else
 		{
-			header('Location: index.php');
+			header('Location: index.php?erreur=1');
 		}
 	}
 	else
 	{
-		header('Location: index.php');
+		header('Location: index.php?erreur=1');
 	}
 }
 else
 {
-	header('Location: index.php');
+	header('Location: index.php?erreur=2');
 }
