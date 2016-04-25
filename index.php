@@ -13,19 +13,24 @@ $req = $bdd->query('SELECT * FROM quiz ORDER BY quiz_id');
     <body>
     	<center>
     		<h1>Mes Quiz</h1>
-            <div class="message">
-                <?php
-                if (isset($_GET['erreur']) AND $_GET['erreur'] == 1)
-                {
-                    echo "Une erreur est survenue";
-                }
-                elseif(isset($_GET['erreur']) AND $_GET['erreur'] == 2) 
-                {
-                    echo "Vous n'avez pas accès à cette page pour le moment";
-                }
+            <?php
+            if(isset($_GET['erreur']))
+            {
                 ?>
-            </div>
-            <?php  
+                <div class="message">
+                    <?php
+                    if($_GET['erreur'] == 1)
+                    {
+                        echo "Une erreur est survenue";
+                    }
+                    elseif($_GET['erreur'] == 2) 
+                    {
+                        echo "Vous n'avez pas accès à cette page pour le moment";
+                    }
+                    ?>
+                </div>
+                <?php
+            }  
             while ($quiz = $req->fetch()) 
             {
                 ?>

@@ -3,7 +3,9 @@ include('includes/bdd.php');
 //Recupération du nom du Quiz et verification si le Quiz éxiste
 if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
 {
-    $req_n = $bdd->query('SELECT * FROM quiz WHERE quiz_id = '.$_GET['quiz'].'');
+    $req_n = $bdd->prepare('SELECT * FROM quiz WHERE quiz_id = :quiz');
+    $req_n->bindParam('quiz',$_GET['quiz'], PDO::PARAM_INT);
+    $req_n->execute();
     $quiz_n = $req_n->fetch();
     if($quiz_n)
     {
@@ -15,7 +17,6 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
         //Préparation de la Recupération des Réponses
         $req_s = $bdd->prepare('SELECT id_reponse, reponse FROM quiz_reponses WHERE id_question = :question_id AND quiz_id = '.$id_quiz.' ORDER BY id_reponse');
         ?>
-
         <!DOCTYPE html>
         <html>
             <head>
@@ -27,18 +28,25 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
             <body>
             	<center>
             		<h1><?php echo $nom_quiz;?></h1>
-                    <div class="message">
-                        <?php
-                        if (isset($_GET['erreur']) AND $_GET['erreur'] == 1)
-                        {
-                            echo "Une erreur est survenue";
-                        }
-                        if(isset($_GET['erreur']) AND $_GET['erreur'] == 2) 
-                        {
-                        echo "Il faut cocher une case par question !";
-                        }
+                    <?php
+                    if(isset($_GET['erreur']))
+                    {   
                         ?>
-                       </div>    
+                        <div class="message">
+                            <?php
+                            if($_GET['erreur'] == 1)
+                            {
+                                 echo "Une erreur est survenue";
+                            }
+                            elseif($_GET['erreur'] == 2) 
+                            {
+                                echo "Il faut cocher une case par question !";
+                            }
+                            ?>
+                        </div>
+                        <?php
+                    }  
+                    ?> 
             		<form action="includes/quiz_post.php" method="post">
             			<p>
                     		<?php
