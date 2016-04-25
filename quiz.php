@@ -1,8 +1,5 @@
 <?php
 include('includes/bdd.php');
-session_start();
-$_SESSION = array();
-session_destroy();
 //Recupération du nom du Quiz et verification si le Quiz éxiste
 $req_n = $bdd->query('SELECT * FROM quiz WHERE quiz_id = '.$_GET['quiz'].'');
 $quiz_n = $req_n->fetch();
@@ -28,6 +25,18 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0 AND $quiz_n)
         <body>
         	<center>
         		<h1><?php echo $nom_quiz;?></h1>
+                <div class="message">
+                    <?php
+                    if (isset($_GET['erreur']) AND $_GET['erreur'] == 1)
+                    {
+                        echo "Une erreur est survenue";
+                    }
+                    if(isset($_GET['erreur']) AND $_GET['erreur'] == 2) 
+                    {
+                    echo "Il faut cocher une case par question !";
+                    }
+                    ?>
+                   </div>    
         		<form action="includes/quiz_post.php" method="post">
         			<p>
                 		<?php
