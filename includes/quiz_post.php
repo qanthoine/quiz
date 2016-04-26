@@ -12,7 +12,6 @@ if(!empty($_POST['id_quiz']))
 	$req_r->bindParam('id',$id_quiz,PDO::PARAM_INT);
 	if(count($_POST['input']) == $nb_q)
 	{
-		$_SESSION['points'] = 0;
 		$points_q = 100 / $nb_q;
 		$points_r = round($points_q, 2);
 		$i = 1;
@@ -24,19 +23,20 @@ if(!empty($_POST['id_quiz']))
 			$req_r->bindParam('id_q',$id_quest,PDO::PARAM_INT);
 			$req_r->execute();
 			$resultat_req = $req_r->fetch();
-			$points = $_SESSION['points'];
+			$points = $_SESSION['points'][$id_quiz];
 			if($resultat_req['resultat'] == 1)
 			{
-				$_SESSION['points'] = $points + $points_r;
+				$_SESSION['points'][$id_quiz] = $points + $points_r;
 				$_SESSION['question'][$id_quest] = $id_input;
 			}
 			else
 			{
-				$_SESSION['points'] = $points + 0;
+				$_SESSION['points'][$id_quiz] = $points + 0;
 				$_SESSION['question'][$id_quest] = $id_input;
 			}	
 		}
 		$_SESSION['fin'] = 1;
+		$_SESSION['quiz_termine'][$id_quiz] = $id_quiz;
 		header('Location: ../correction.php?quiz='.$id_quiz);
 	}
 	else

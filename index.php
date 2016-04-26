@@ -49,7 +49,7 @@ $req = $bdd->query('SELECT * FROM quiz ORDER BY quiz_id');
             	       <?php echo $description;?><br><br>
                     </div>
                     <?php
-                    if(isset($_SESSION['quiz_termine']) AND $_SESSION['quiz_termine'] == $quiz_id)
+                    if(isset($_SESSION['quiz_termine'][$quiz_id]))
                     {  
                         ?>
                         <div id="boutton_quiz">

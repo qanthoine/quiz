@@ -91,7 +91,6 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                                                 ?>
                                               <input type="checkbox" name="input[<?php echo $question_id;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
                                               <?php
-
                                             }    
                                               ?>
                                         </div>    

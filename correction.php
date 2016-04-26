@@ -22,7 +22,7 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 	    	$req->execute();
 	    	//Préparation de la Recupération des Réponses
 	    	$req_s = $bdd->prepare('SELECT id_reponse, reponse, resultat FROM quiz_reponses WHERE id_question = :question_id AND quiz_id = :id ORDER BY id_reponse');
-	    	$score = htmlspecialchars($_SESSION['points']);
+	    	$score = htmlspecialchars($_SESSION['points'][$quiz_id]);
 	    	?>
 	    	<!DOCTYPE html>
 	    	<html>
