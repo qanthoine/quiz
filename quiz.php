@@ -1,10 +1,11 @@
 <?php
 include('includes/bdd.php');
+session_start();
 //Recupération du nom du Quiz et verification si le Quiz éxiste
 if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
 {
     $id_quiz = htmlspecialchars($_GET['quiz']);
-    if(!isset($_SESSION['quiz_termine'][$quiz_id]))
+    if(!isset($_SESSION['quiz_termine'][$id_quiz]))
     {
         $req_n = $bdd->prepare('SELECT * FROM quiz WHERE quiz_id = :quiz');
         $req_n->bindParam('quiz',$id_quiz, PDO::PARAM_INT);
