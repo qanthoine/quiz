@@ -4,7 +4,7 @@ include('includes/bdd.php');
 if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
 {
     $id_quiz = htmlspecialchars($_GET['quiz']);
-    if(isset($_SESSION['quiz_termine'][$quiz_id]))
+    if(!isset($_SESSION['quiz_termine'][$quiz_id]))
     {
         $req_n = $bdd->prepare('SELECT * FROM quiz WHERE quiz_id = :quiz');
         $req_n->bindParam('quiz',$id_quiz, PDO::PARAM_INT);
