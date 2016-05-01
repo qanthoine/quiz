@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-04-21 17:40:58
+Date: 2016-05-01 15:19:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,8 @@ CREATE TABLE `quiz_reponses` (
   `resultat` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `quiz_id` (`quiz_id`),
-  CONSTRAINT `quiz_id_quiz` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`quiz_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `quiz_id_quiz` (`id_question`),
+  CONSTRAINT `quiz_id_quiz` FOREIGN KEY (`id_question`) REFERENCES `quiz_questions` (`id_question`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
