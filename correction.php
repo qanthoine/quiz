@@ -3,7 +3,7 @@ include('includes/bdd.php');
 session_start();
 if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 {
-	unset($_SESSION['fin']);
+	// unset($_SESSION['fin']);
 	if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
 	{
 		$quiz_id = htmlspecialchars($_GET['quiz']);
@@ -61,7 +61,7 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 			                			$reponse_id = htmlspecialchars($quiz_r['id_reponse']);
 			                			$reponse = htmlspecialchars($quiz_r['reponse']);
 			                			$resultat = htmlspecialchars($quiz_r['resultat']);
-			                			$session_rep = htmlspecialchars($_SESSION['question'][$question_id]);
+			                			$session_rep = htmlspecialchars($_SESSION[$question_id][$reponse_id]);
 			                			if($resultat == 1)
 			                			{
 			                				$logo = 'ok.jpg';             				
