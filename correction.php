@@ -94,7 +94,7 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 		            		}
 		            		?>
 		            		<br>
-		                	<a href="index.php"> <input type="button" value="Retour à la liste des Quiz">
+		                	<a href="index.php"><input type="button" value="Retour à la liste des Quiz"></a>
 		                	<?php
 		            		$req->closeCursor();
 		            		?>
