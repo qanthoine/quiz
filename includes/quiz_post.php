@@ -38,7 +38,6 @@ if(!empty($_POST['id_quiz']))
 	// Pause de la préparation
 
 	// Liste des variables
-	$_SESSION['points'] = array();
 	$points_q = 100 / $nb_rep_total;
 	$points_r = round($points_q, 2);
 	// Fin de Liste des variables

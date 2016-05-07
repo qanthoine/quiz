@@ -38,6 +38,13 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 			$req_compte_reponse->bindParam('id',$quiz_id,PDO::PARAM_INT);
 			// Pause de la préparation
 	    	
+	    	// Traitement score 
+	    	if($score > 100)
+	    	{
+	    		$score = 100;
+	    	}
+	    	// Fin du traitement
+	    		
 	    	?>
 	    	<!DOCTYPE html>
 	    	<html>

@@ -41,6 +41,18 @@ $req = $bdd->query('SELECT * FROM quiz ORDER BY quiz_id');
                     $nom_quiz = htmlspecialchars($quiz['nom_quiz']);
                     $description = htmlspecialchars($quiz['description']);
                     $nb_questions = htmlspecialchars($quiz['nb_questions']);
+
+                    // Traitement score 
+                    if(isset($_SESSION['points'][$quiz_id]))
+                    {
+                        $score = $_SESSION['points'][$quiz_id];
+                        if($score > 100)
+                        {
+                            $score = 100;
+                        }
+                    }
+                    // Fin du traitement
+
                     ?>
                     <div id="titre_quiz">
             	       <h2><?php echo $nom_quiz;?> (<?php echo $nb_questions;?> questions)</h2>
@@ -54,7 +66,7 @@ $req = $bdd->query('SELECT * FROM quiz ORDER BY quiz_id');
                         ?>
                         <div id="boutton_quiz">
                            <img src="img/croix.jpg" alt="croix.jpg" width="15"/> 
-                           Quiz terminé ! Score : <?php echo $_SESSION['points'][$quiz_id];?>% 
+                           Quiz terminé ! Score : <?php echo $score;?>% 
                            <img src="img/croix.jpg" alt="croix.jpg" width="15"/>
                         </div>
                         <?php                        
