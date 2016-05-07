@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-05-01 14:40:11
+Date: 2016-05-08 01:52:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `quiz_reponses` (
   PRIMARY KEY (`id`),
   KEY `quiz_id` (`quiz_id`),
   CONSTRAINT `quiz_id_quiz` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`quiz_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of quiz_reponses
@@ -47,9 +47,9 @@ INSERT INTO `quiz_reponses` VALUES ('10', '1', '3', '4', '6.7', '0');
 INSERT INTO `quiz_reponses` VALUES ('11', '1', '3', '5', '5.9', '0');
 INSERT INTO `quiz_reponses` VALUES ('12', '1', '4', '1', '4', '1');
 INSERT INTO `quiz_reponses` VALUES ('13', '1', '4', '2', '5', '0');
-INSERT INTO `quiz_reponses` VALUES ('14', '2', '1', '1', '11 ans', '0');
-INSERT INTO `quiz_reponses` VALUES ('15', '2', '1', '2', '13 ans', '0');
-INSERT INTO `quiz_reponses` VALUES ('16', '2', '1', '3', '15 ans', '1');
+INSERT INTO `quiz_reponses` VALUES ('14', '2', '1', '1', '11 ans', '1');
+INSERT INTO `quiz_reponses` VALUES ('15', '2', '1', '2', '13 ans', '1');
+INSERT INTO `quiz_reponses` VALUES ('16', '2', '1', '3', '15 ans', '0');
 INSERT INTO `quiz_reponses` VALUES ('17', '2', '2', '1', '9-12 ans', '0');
 INSERT INTO `quiz_reponses` VALUES ('18', '2', '2', '2', '10-13 ans', '1');
 INSERT INTO `quiz_reponses` VALUES ('19', '2', '2', '3', '11-14 ans', '0');
@@ -63,8 +63,8 @@ INSERT INTO `quiz_reponses` VALUES ('26', '2', '5', '2', 'Lionne', '1');
 INSERT INTO `quiz_reponses` VALUES ('27', '2', '5', '3', 'Marcassin', '0');
 INSERT INTO `quiz_reponses` VALUES ('28', '2', '5', '4', 'Léoparde', '0');
 INSERT INTO `quiz_reponses` VALUES ('29', '2', '5', '5', 'Poule', '0');
-INSERT INTO `quiz_reponses` VALUES ('30', '3', '1', '1', 'Mont-Blanc', '1');
-INSERT INTO `quiz_reponses` VALUES ('31', '3', '1', '2', 'Pic du Midi', '0');
+INSERT INTO `quiz_reponses` VALUES ('30', '3', '1', '1', '3000m', '1');
+INSERT INTO `quiz_reponses` VALUES ('31', '3', '1', '2', '4000m', '1');
 INSERT INTO `quiz_reponses` VALUES ('32', '3', '2', '1', 'Le Mont du Lioran', '0');
 INSERT INTO `quiz_reponses` VALUES ('33', '3', '2', '2', 'Le Plomb du Cantal', '1');
 INSERT INTO `quiz_reponses` VALUES ('34', '3', '2', '3', 'Le Puy du Cantal', '0');
@@ -81,3 +81,4 @@ INSERT INTO `quiz_reponses` VALUES ('44', '3', '6', '1', 'Le Jura', '0');
 INSERT INTO `quiz_reponses` VALUES ('45', '3', '6', '2', 'Le Massif central', '1');
 INSERT INTO `quiz_reponses` VALUES ('46', '2', '3', '1', 'Felis catus', '1');
 INSERT INTO `quiz_reponses` VALUES ('47', '2', '3', '2', 'Felidae', '0');
+INSERT INTO `quiz_reponses` VALUES ('48', '3', '1', '3', '6000m', '0');
