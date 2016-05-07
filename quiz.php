@@ -48,6 +48,10 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                                 {
                                     echo "Il faut cocher au moins une case par question !";
                                 }
+                                elseif($_GET['erreur'] == 3) 
+                                {
+                                    echo "Vous n'avez pas coché le nombre de cases requises !";
+                                }
                                 ?>
                             </div>
                             <?php
@@ -75,6 +79,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                                 		<?php
                                         $req_s->bindParam('question_id',$question_id,PDO::PARAM_INT);
                                 		$req_s->execute();
+                                        $i = 1;
                             			while ($quiz_r = $req_s->fetch()) 
                             			{
                                 			$reponse_id = htmlspecialchars($quiz_r['id_reponse']);
@@ -86,14 +91,15 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                                                 if($nb_rep == 1)
                                                 {
                                                     ?>
-                                		          <input type="radio" name="<?php echo $question_id;?>[<?php echo $reponse_id;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
+                                		          <input type="radio" name="input[<?php echo $question_id;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
                                                   <?php
                                                 }
                                                 else
                                                 {
                                                     ?>
-                                                  <input type="checkbox" name="<?php echo $question_id;?>[<?php echo $reponse_id;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
+                                                  <input type="checkbox" name="input[<?php echo $question_id;?>][<?php echo $i;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
                                                   <?php
+                                                  $i++;
                                                 }    
                                                 ?>
                                             </div>    

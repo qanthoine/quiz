@@ -3,7 +3,7 @@
 	border-radius: 5px;
 	border: 1px solid black;	
 	width: 50%;
-	margin :15px;
+	margin :3px;
 }
 #titre_quiz
 {
@@ -48,6 +48,6 @@
 	border: 1px solid red;
 	text-align: center;
 	margin-top: 15px;
-	padding: 5px;
+	padding: 3px;
 	margin-bottom: 20px;
 }
