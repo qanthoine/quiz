@@ -37,6 +37,16 @@ if(!empty($_POST['id_quiz']))
 	$req_nb_reponse->bindParam('id',$id_quiz,PDO::PARAM_INT);
 	// Pause de la préparation
 
+	// Je prépare la requête pour récuperer le type de Quizz [[Requête 4]]
+	$req_type= $bdd->prepare('SELECT type FROM quiz_questions WHERE quiz_id = :id AND id_question = :id_q');
+	$req_type->bindParam('id',$id_quiz,PDO::PARAM_INT);
+	// Pause de la préparation
+
+	// Je prépare la requête pour récuperer la reponse du champs à saisir [[Requête 5]]
+	$req_recup_reponse= $bdd->prepare('SELECT reponse FROM quiz_reponses WHERE quiz_id = :id AND id_question = :id_q AND id_reponse = :id_r');
+	$req_recup_reponse->bindParam('id',$id_quiz,PDO::PARAM_INT);
+	// Pause de la préparation
+
 	// Liste des variables
 	$points_q = 100 / $nb_rep_total;
 	$points_r = round($points_q, 2);
@@ -49,87 +59,29 @@ if(!empty($_POST['id_quiz']))
 		{
 			$id_quest = $i;
 
-			// Reprise de la requête [[Requête 1]]
-			$req_r->bindParam('id_q',$id_quest,PDO::PARAM_INT);
-			$req_r->execute();
-			$sql_nb_rep = $req_r->fetch();
-			$nb_rep = $sql_nb_rep['nb_rep'];
+			// Reprise de la requête [[Requête 4]]
+			$req_type->bindParam('id_q',$id_quest,PDO::PARAM_INT);
+			$req_type->execute();
+			$type_req = $req_type->fetch();
+			$req_type->closeCursor();
+			// Fin de la requête [[Requête 4]]
 
-			// Fin de la requête [[Requête 1]]
-
-			if($nb_rep == 1) // Si le nombre de reponse possible est égale à 1
+			$type = $type_req['type'];
+			if($type == 1)
 			{
-				$i_incre = 1;
-				$id_rep = $_POST['input'][$i];
-
-				// Reprise de la requête [[Requête 2]]
-				$req_resultat->bindParam('id_q',$id_quest,PDO::PARAM_INT);
-				$req_resultat->bindParam('id_r',$id_rep,PDO::PARAM_INT);
-				$req_resultat->execute();
-				$resultat_req = $req_resultat->fetch();
-				// Fin de la requête [[Requête 2]]
-
-				$points = $_SESSION['points'][$id_quiz];		
-				if($resultat_req['resultat'] == 1)
-				{
-					$_SESSION['points'][$id_quiz] = $points + $points_r;
-					$_SESSION['question'][$id_quest][$i][$i_incre] = $id_rep;
-				}
-				else
-				{
-					$_SESSION['points'][$id_quiz] = $points + 0;
-					$_SESSION['question'][$id_quest][$i][$i_incre] = $id_rep;
-				}
+				include('formulaire_qcm.php');
 			}
-			else // Sinon ..
+			elseif($type == 2)
 			{
-				$id_case = 1;
-
-				// Reprise de la requête [[Requête 3]]
-				$req_nb_reponse->bindParam('id_q',$id_quest,PDO::PARAM_INT);
-				$req_nb_reponse->execute();
-				$nb_reponse = $req_nb_reponse->rowcount();
-				// Fin de la requête [[Requête 3]]
-				if(count($_POST['input'][$i]) == $nb_rep)
-				{
-					for($_POST['input'][$i][$id_case];$id_case <= $nb_reponse;$id_case++)
-					{
-						if(!empty($_POST['input'][$i][$id_case]))
-						{
-							$i_incre = $id_case;
-							$id_rep = $_POST['input'][$i][$id_case];
-
-							// Reprise de la requête [[Requête 2]]
-							$req_resultat->bindParam('id_q',$id_quest,PDO::PARAM_INT);
-							$req_resultat->bindParam('id_r',$id_rep,PDO::PARAM_INT);
-							$req_resultat->execute();
-							$resultat_req = $req_resultat->fetch();
-							// Fin de la requête [[Requête 2]]
-
-							$points = $_SESSION['points'][$id_quiz];	
-							if($resultat_req['resultat'] == 1)
-							{
-								$_SESSION['points'][$id_quiz] = $points + $points_r;
-								$_SESSION['question'][$id_quest][$i][$i_incre] = $id_rep;
-							}
-							else
-							{
-								$_SESSION['points'][$id_quiz] = $points + 0;
-								$_SESSION['question'][$id_quest][$i][$i_incre] = $id_rep;
-							}
-						}
-					}
-				}
-				else
-				{
-					header('Location: ../quiz.php?quiz='.$id_quiz.'&erreur=3');
-					exit();
-					
-				}
+				include('formulaire_champs.php');
 			}
+			elseif($type == 3)
+			{
+				include('formulaire_ordonne.php');
+			}	
+
 		}
 		$_SESSION['fin'] = 1;
-		$_SESSION['quiz_termine'][$id_quiz] = $id_quiz;
 		header('Location: ../correction.php?quiz='.$id_quiz);
 	}
 	else

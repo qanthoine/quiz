@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-05-08 01:52:21
+Date: 2016-05-08 15:37:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,6 +24,7 @@ CREATE TABLE `quiz_questions` (
   `quiz_id` int(11) NOT NULL,
   `id_question` int(11) NOT NULL,
   `question` varchar(255) NOT NULL,
+  `type` int(11) NOT NULL COMMENT '1 = QCM // 2 = Champs à Saisir // 3 = Eléments à ordonner',
   `nb_rep` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `quiz_id` (`quiz_id`),
@@ -33,18 +34,18 @@ CREATE TABLE `quiz_questions` (
 -- ----------------------------
 -- Records of quiz_questions
 -- ----------------------------
-INSERT INTO `quiz_questions` VALUES ('1', '1', '1', 'Nombre inférieur à 5 ?', '2');
-INSERT INTO `quiz_questions` VALUES ('2', '1', '2', 'Combien font 12x15 ?', '1');
-INSERT INTO `quiz_questions` VALUES ('3', '1', '3', 'Combien font 27/5 ?', '1');
-INSERT INTO `quiz_questions` VALUES ('4', '1', '4', 'Combien font 2+2 ?', '1');
-INSERT INTO `quiz_questions` VALUES ('5', '2', '1', 'Age inférieur à 15', '2');
-INSERT INTO `quiz_questions` VALUES ('6', '2', '2', 'Espérance de vie moyenne d\'un chien ?', '1');
-INSERT INTO `quiz_questions` VALUES ('7', '2', '3', 'Nom scientifique d\'un chat ?', '1');
-INSERT INTO `quiz_questions` VALUES ('8', '2', '4', 'Petit du Sanglier ?', '1');
-INSERT INTO `quiz_questions` VALUES ('9', '2', '5', 'Femelle du Lion ?', '1');
-INSERT INTO `quiz_questions` VALUES ('10', '3', '1', 'Altitude inférieur à 5000m', '2');
-INSERT INTO `quiz_questions` VALUES ('11', '3', '2', 'Quel est le plus haut sommet du Cantal ?', '1');
-INSERT INTO `quiz_questions` VALUES ('12', '3', '3', 'Quel est le point culminant des Pyrénées ?\r\n', '1');
-INSERT INTO `quiz_questions` VALUES ('13', '3', '4', 'Combien y-a-t-il de sommets de plus de 4000 mètres dans le massif du Mont-Blanc ?', '1');
-INSERT INTO `quiz_questions` VALUES ('14', '3', '5', 'Parmi ces trois glaciers, lequel est le plus grand ?', '1');
-INSERT INTO `quiz_questions` VALUES ('15', '3', '6', 'Quelle est la plus vieille montagne de France ?', '1');
+INSERT INTO `quiz_questions` VALUES ('1', '1', '1', 'Nombre inférieur à 5 ?', '2', '2');
+INSERT INTO `quiz_questions` VALUES ('2', '1', '2', 'Combien font 12x15 ?', '2', '1');
+INSERT INTO `quiz_questions` VALUES ('3', '1', '3', 'Combien font 27/5 ?', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('4', '1', '4', 'Combien font 2+2 ?', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('5', '2', '1', 'Age inférieur à 15', '1', '2');
+INSERT INTO `quiz_questions` VALUES ('6', '2', '2', 'Espérance de vie moyenne d\'un chien ?', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('7', '2', '3', 'Nom scientifique d\'un chat ?', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('8', '2', '4', 'Petit du Sanglier ?', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('9', '2', '5', 'Femelle du Lion ?', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('10', '3', '1', 'Altitude inférieur à 5000m', '1', '2');
+INSERT INTO `quiz_questions` VALUES ('11', '3', '2', 'Quel est le plus haut sommet du Cantal ?', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('12', '3', '3', 'Quel est le point culminant des Pyrénées ?\r\n', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('13', '3', '4', 'Combien y-a-t-il de sommets de plus de 4000 mètres dans le massif du Mont-Blanc ?', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('14', '3', '5', 'Parmi ces trois glaciers, lequel est le plus grand ?', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('15', '3', '6', 'Quelle est la plus vieille montagne de France ?', '1', '1');

@@ -29,7 +29,7 @@
 }
 #titre_question
 {
-	width: 50%;
+	width: 95%;
 	margin:3px;
 }
 #question_question
@@ -51,7 +51,7 @@
 	padding: 3px;
 	margin-bottom: 20px;
 }
-textarea
+input
 {
-resize:none;
+	text-align:center;
 }

@@ -94,28 +94,30 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                                                     if($nb_rep == 1)
                                                     {
                                                         ?>
-                                    		          <input type="radio" name="input[<?php echo $question_id;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
+                                    		          <input type="radio" name="input[<?php echo $question_id;?>][<?php echo $type_quizz;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
                                                       <?php
                                                     }
                                                     else
                                                     {
                                                         ?>
-                                                      <input type="checkbox" name="input[<?php echo $question_id;?>][<?php echo $i;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
+                                                      <input type="checkbox" name="input[<?php echo $question_id;?>][<?php echo $type_quizz;?>][<?php echo $i;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
                                                       <?php
                                                       $i++;
                                                     }
                                                 }
                                                 elseif($type_quizz == 2)  
                                                 {
-                                                    $max = strlen($reponse);
                                                     ?>
-                                                        <textarea name="input[<?php echo $question_id;?>]" rows="1" cols="3" required maxlength="<?php echo $max; ?>"></textarea>
+                                                        <input type="text" name="input[<?php echo $question_id;?>][<?php echo $type_quizz;?>]" required />
                                                     <?php
                                                 }
-/*                                                elseif($type_quizz == 3)
+                                                elseif($type_quizz == 3)
                                                 {
-
-                                                } */ 
+                                                    ?>
+                                                        <input type="text" name="input[<?php echo $question_id;?>][<?php echo $type_quizz;?>][<?php echo $reponse_id;?>]" required />
+                                                    <?php
+                                                    echo $reponse;
+                                                } 
                                                 ?>
                                             </div>    
                                 			<?php
