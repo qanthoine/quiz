@@ -57,7 +57,6 @@ if(!empty($_POST['id_quiz']))
 
 	// Creation de DATA HISTORIQUE
 	$req_write_historique = $bdd->prepare("INSERT INTO quiz_historique_data (historique_id, question_id, reponse_id) VALUES (:id, :question_id, :reponse_id)");
-	$req_write_historique->bindParam('id',$lastid,PDO::PARAM_INT);
 	// Pause de la préparation
 
 	// UPDATE SCORE
@@ -81,6 +80,7 @@ if(!empty($_POST['id_quiz']))
 	$req_historique->execute();
 	$last_id = $req_historique->fetch();
 	$lastid = $last_id['id'];
+	$req_write_historique->bindParam('id',$lastid,PDO::PARAM_INT);
 	//Fin
 
 	if(count($_POST['input']) == $nb_q)
