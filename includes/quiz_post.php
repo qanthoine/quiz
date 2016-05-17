@@ -47,16 +47,48 @@ if(!empty($_POST['id_quiz']))
 	$req_recup_reponse->bindParam('id',$id_quiz,PDO::PARAM_INT);
 	// Pause de la préparation
 
+	// Creation Historique
+	$req_creat_historique = $bdd->prepare("INSERT INTO quiz_historique_info (ip, quiz_id, time_now) VALUES (:ip, :quiz_id, :time_now)");
+	// Pause de la préparation
+
+	// Recuperation de la dernière ligne + traitement
+	$req_historique = $bdd->prepare('SELECT id FROM quiz_historique_info ORDER BY id DESC LIMIT 0,1');
+	// Pause de la préparation
+
+	// Creation de DATA HISTORIQUE
+	$req_write_historique = $bdd->prepare("INSERT INTO quiz_historique_data (historique_id, question_id, reponse_id) VALUES (:id, :question_id, :reponse_id)");
+	$req_write_historique->bindParam('id',$lastid,PDO::PARAM_INT);
+	// Pause de la préparation
+
+	// UPDATE SCORE
+	$req_update_score = $bdd->prepare("UPDATE quiz_historique_info SET score = :score WHERE id = :lastid");
+	$req_update_score->bindParam('lastid',$lastid,PDO::PARAM_INT);
+	// Pause de la préparation
+
 	// Liste des variables
 	$points_q = 100 / $nb_rep_total;
 	$points_r = round($points_q, 2);
+	$_SESSION['points'][$id_quiz] = 0;
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$time_now = time();
 	// Fin de Liste des variables
+
+	//Creation historique
+	$req_creat_historique->bindParam('ip',$ip,PDO::PARAM_INT);
+	$req_creat_historique->bindParam('quiz_id',$id_quiz,PDO::PARAM_INT);
+	$req_creat_historique->bindParam('time_now',$time_now,PDO::PARAM_INT);
+	$req_creat_historique->execute();
+	$req_historique->execute();
+	$last_id = $req_historique->fetch();
+	$lastid = $last_id['id'];
+	//Fin
 
 	if(count($_POST['input']) == $nb_q)
 	{
 		$i = 1;
 		for($_POST['input'][$i];$i <= $nb_q;$i++)
 		{
+			$points = $_SESSION['points'][$id_quiz];
 			$id_quest = $i;
 
 			// Reprise de la requête [[Requête 4]]
@@ -64,6 +96,7 @@ if(!empty($_POST['id_quiz']))
 			$req_type->execute();
 			$type_req = $req_type->fetch();
 			$req_type->closeCursor();
+			$req_write_historique->bindParam('question_id',$id_quest,PDO::PARAM_INT);
 			// Fin de la requête [[Requête 4]]
 
 			$type = $type_req['type'];
@@ -82,7 +115,10 @@ if(!empty($_POST['id_quiz']))
 
 		}
 		$_SESSION['fin'] = 1;
-		header('Location: ../correction.php?quiz='.$id_quiz);
+		$score_final = $_SESSION['points'][$id_quiz];
+		$req_update_score->bindParam('score',$score_final,PDO::PARAM_INT);
+		$req_update_score->execute();
+		//header('Location: ../correction.php?quiz='.$id_quiz);
 	}
 	else
 	{

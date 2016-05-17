@@ -94,7 +94,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                                                     if($nb_rep == 1)
                                                     {
                                                         ?>
-                                    		          <input type="radio" name="input[<?php echo $question_id;?>][<?php echo $type_quizz;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>" /> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
+                                    		          <input type="radio" name="input[<?php echo $question_id;?>][<?php echo $type_quizz;?>]" value="<?php echo $reponse_id;?>" id="<?php echo $reponse_id;?>"/> <label for="<?php echo $reponse_id;?>"><?php echo $reponse;?></label><br>
                                                       <?php
                                                     }
                                                     else

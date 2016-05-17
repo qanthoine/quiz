@@ -3,7 +3,6 @@
 	border-radius: 5px;
 	border: 1px solid black;	
 	width: 50%;
-	margin :3px;
 }
 #titre_quiz
 {
@@ -25,17 +24,15 @@
 	border-radius: 5px;
 	border: 1px solid black;	
 	width: 50%;
-	margin :15px;
+	margin : 15px;
 }
 #titre_question
 {
 	width: 95%;
-	margin:3px;
 }
 #question_question
 {
 	width: 50%;
-	margin:3px;
 }
 #reponse_question
 {
@@ -54,4 +51,20 @@
 input
 {
 	text-align:center;
+}
+#correction
+{
+	border: 1px solid green;
+	border-radius: 5px;
+	padding-bottom: 3px;
+	margin: 8px;
+	width: 50%;
+}
+#vosreponses
+{
+	margin : 8px;
+	border: 1px solid blue;
+	border-radius: 5px;
+	padding: 5px;
+	width: 50%;
 }
