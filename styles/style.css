@@ -3,6 +3,7 @@
 	border-radius: 5px;
 	border: 1px solid black;	
 	width: 50%;
+	margin: 15px;
 }
 #titre_quiz
 {
@@ -67,4 +68,20 @@ input
 	border-radius: 5px;
 	padding: 5px;
 	width: 50%;
+}
+table
+{
+	text-align: center;
+    border-collapse: collapse;
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+    padding : 8px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+#typetrois
+{
+	max-width: 20px;
 }

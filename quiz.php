@@ -34,6 +34,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                 <body>
                 	<center>
                 		<h1><?php echo $nom_quiz;?></h1>
+                        <h2><a href="progress.php?quiz=<?php echo $id_quiz;?>">Voir mon Historique !</a></h2>
                         <?php
                         if(isset($_GET['erreur']))
                         {   
@@ -51,6 +52,10 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                                 elseif($_GET['erreur'] == 3) 
                                 {
                                     echo "Vous n'avez pas coché le nombre de cases requises !";
+                                }
+                                elseif($_GET['erreur'] == 4) 
+                                {
+                                    echo "Vous n'avez pas rempli toute les cases";
                                 }
                                 ?>
                             </div>
@@ -114,7 +119,7 @@ if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
                                                 elseif($type_quizz == 3)
                                                 {
                                                     ?>
-                                                        <input type="text" name="input[<?php echo $question_id;?>][<?php echo $type_quizz;?>][<?php echo $reponse_id;?>]" required />
+                                                        <input type="text" name="input[<?php echo $question_id;?>][<?php echo $type_quizz;?>][<?php echo $reponse_id;?>]" required id="typetrois" maxlength="2"/>
                                                     <?php
                                                     echo $reponse;
                                                 } 

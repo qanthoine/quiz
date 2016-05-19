@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-05-08 15:37:36
+Date: 2016-05-19 15:20:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,14 +37,10 @@ CREATE TABLE `quiz_reponses` (
 INSERT INTO `quiz_reponses` VALUES ('1', '1', '1', '1', '2', '1');
 INSERT INTO `quiz_reponses` VALUES ('2', '1', '1', '2', '4', '1');
 INSERT INTO `quiz_reponses` VALUES ('3', '1', '1', '3', '6', '0');
-INSERT INTO `quiz_reponses` VALUES ('4', '1', '2', '1', '132', '0');
-INSERT INTO `quiz_reponses` VALUES ('5', '1', '2', '2', '180', '1');
-INSERT INTO `quiz_reponses` VALUES ('6', '1', '2', '3', '453', '0');
-INSERT INTO `quiz_reponses` VALUES ('7', '1', '3', '1', '12.5', '0');
-INSERT INTO `quiz_reponses` VALUES ('8', '1', '3', '2', '3.54', '0');
-INSERT INTO `quiz_reponses` VALUES ('9', '1', '3', '3', '5.4', '1');
-INSERT INTO `quiz_reponses` VALUES ('10', '1', '3', '4', '6.7', '0');
-INSERT INTO `quiz_reponses` VALUES ('11', '1', '3', '5', '5.9', '0');
+INSERT INTO `quiz_reponses` VALUES ('4', '1', '2', '1', '101', '1');
+INSERT INTO `quiz_reponses` VALUES ('7', '1', '3', '1', '50', '3');
+INSERT INTO `quiz_reponses` VALUES ('8', '1', '3', '2', '10', '1');
+INSERT INTO `quiz_reponses` VALUES ('9', '1', '3', '3', '25', '2');
 INSERT INTO `quiz_reponses` VALUES ('12', '1', '4', '1', '4', '1');
 INSERT INTO `quiz_reponses` VALUES ('13', '1', '4', '2', '5', '0');
 INSERT INTO `quiz_reponses` VALUES ('14', '2', '1', '1', '11 ans', '1');

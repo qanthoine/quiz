@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-05-08 15:37:30
+Date: 2016-05-19 15:16:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,9 +34,9 @@ CREATE TABLE `quiz_questions` (
 -- ----------------------------
 -- Records of quiz_questions
 -- ----------------------------
-INSERT INTO `quiz_questions` VALUES ('1', '1', '1', 'Nombre inférieur à 5 ?', '2', '2');
-INSERT INTO `quiz_questions` VALUES ('2', '1', '2', 'Combien font 12x15 ?', '2', '1');
-INSERT INTO `quiz_questions` VALUES ('3', '1', '3', 'Combien font 27/5 ?', '1', '1');
+INSERT INTO `quiz_questions` VALUES ('1', '1', '1', 'Nombre inférieur à 5 ?', '1', '2');
+INSERT INTO `quiz_questions` VALUES ('2', '1', '2', '50+51 = ?', '2', '1');
+INSERT INTO `quiz_questions` VALUES ('3', '1', '3', 'Ordonner ces nombres (avec des chiffres (1,2,3,...)) dans l\'ordre croissant', '3', '3');
 INSERT INTO `quiz_questions` VALUES ('4', '1', '4', 'Combien font 2+2 ?', '1', '1');
 INSERT INTO `quiz_questions` VALUES ('5', '2', '1', 'Age inférieur à 15', '1', '2');
 INSERT INTO `quiz_questions` VALUES ('6', '2', '2', 'Espérance de vie moyenne d\'un chien ?', '1', '1');

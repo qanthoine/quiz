@@ -3,6 +3,7 @@ include('includes/bdd.php');
 session_start();
 if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 {
+	unset($_SESSION['fin']);
 	if(isset($_GET['quiz']) AND $_GET['quiz'] > 0)
 	{
 		$quiz_id = htmlspecialchars($_GET['quiz']);
@@ -19,7 +20,8 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 		{
 			// Liste des variables
 			$nom_quiz = htmlspecialchars($quiz_n['nom_quiz']);
-			$score = htmlspecialchars($_SESSION['points'][$quiz_id]);
+			$score = htmlspecialchars($_SESSION['points']);
+			unset($_SESSION['points']);
 			// Fin de Liste des variables
 
 			//Recupération des Questions
@@ -256,6 +258,7 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 								</div>	
 								<?php
 							}
+							unset($_SESSION['question']);
 							?>
 							<br>
 							<a href="index.php"><input type="button" value="Retour à la liste des Quiz"></a>
@@ -278,7 +281,7 @@ if(isset($_SESSION['fin']) AND $_SESSION['fin'] = 1)
 		header('Location: index.php?erreur=1');
 	}
 }
-/*else
+else
 {
 	header('Location: index.php?erreur=2');
-}*/
+}

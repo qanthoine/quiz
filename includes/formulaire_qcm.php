@@ -9,7 +9,7 @@
 
 			if($nb_rep == 1) // Si le nombre de reponse possible est égale à 1
 			{
-				$points = $_SESSION['points'][$id_quiz];
+				$points = $_SESSION['points'];
 				$type = 1;
 				$i_incre = 1;
 				$id_rep = $_POST['input'][$id_quest][$type];
@@ -24,14 +24,12 @@
 						
 				if($resultat_req['resultat'] == 1)
 				{
-					$_SESSION['points'][$id_quiz] = $points + $points_r;
+					$_SESSION['points'] = $points + $points_r;
 					$_SESSION['question'][$id_quest][$type][$i_incre] = $id_rep;
-					echo $_SESSION['points'][$id_quiz];
-							echo "<br>";
 				}
 				else
 				{
-					$_SESSION['points'][$id_quiz] = $points + 0;
+					$_SESSION['points'] = $points + 0;
 					$_SESSION['question'][$id_quest][$type][$i_incre] = $id_rep;
 				}
 				$req_write_historique->bindParam('reponse_id',$id_rep,PDO::PARAM_INT);
@@ -52,7 +50,7 @@
 				{
 					for($_POST['input'][$i][$type][$i_incre];$i_incre <= $nb_reponse;$i_incre++)
 					{
-						$points = $_SESSION['points'][$id_quiz];
+						$points = $_SESSION['points'];
 						if(!empty($_POST['input'][$i][$type][$i_incre]))
 						{
 							$id_rep = $_POST['input'][$i][$type][$i_incre];
@@ -66,12 +64,12 @@
 								
 							if($resultat_req['resultat'] == 1)
 							{
-								$_SESSION['points'][$id_quiz] = $points + $points_r;
+								$_SESSION['points'] = $points + $points_r;
 								$_SESSION['question'][$id_quest][$type][$i_incre] = $id_rep;
 							}
 							else
 							{
-								$_SESSION['points'][$id_quiz] = $points + 0;
+								$_SESSION['points'] = $points + 0;
 								$_SESSION['question'][$id_quest][$type][$i_incre] = $id_rep;
 							}
 							$req_write_historique->bindParam('reponse_id',$id_rep,PDO::PARAM_INT);
@@ -81,8 +79,8 @@
 				}
 				else
 				{
-					header('Location: ../quiz.php?quiz='.$id_quiz.'&erreur=3');
-					die();
-					
+					$req_delete->execute();
+					header('Location: ../quiz.php?quiz='.$id_quiz.'&erreur=4');
+					die();					
 				}
 			}

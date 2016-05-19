@@ -64,15 +64,19 @@ if(!empty($_POST['id_quiz']))
 	$req_update_score->bindParam('lastid',$lastid,PDO::PARAM_INT);
 	// Pause de la préparation
 
+	// DELETE
+	$req_delete = $bdd->prepare("DELETE FROM quiz_historique_info WHERE id = :id");
+	// Pause de la préparation
+
 	// Liste des variables
 	$points_q = 100 / $nb_rep_total;
 	$points_r = round($points_q, 2);
-	$_SESSION['points'][$id_quiz] = 0;
+	$_SESSION['points'] = 0;
 	$ip = $_SERVER['REMOTE_ADDR'];
 	$time_now = time();
 	// Fin de Liste des variables
 
-	//Creation historique
+	//Traitement historique
 	$req_creat_historique->bindParam('ip',$ip,PDO::PARAM_INT);
 	$req_creat_historique->bindParam('quiz_id',$id_quiz,PDO::PARAM_INT);
 	$req_creat_historique->bindParam('time_now',$time_now,PDO::PARAM_INT);
@@ -81,6 +85,7 @@ if(!empty($_POST['id_quiz']))
 	$last_id = $req_historique->fetch();
 	$lastid = $last_id['id'];
 	$req_write_historique->bindParam('id',$lastid,PDO::PARAM_INT);
+	$req_delete->bindParam('id',$lastid,PDO::PARAM_INT);
 	//Fin
 
 	if(count($_POST['input']) == $nb_q)
@@ -88,7 +93,7 @@ if(!empty($_POST['id_quiz']))
 		$i = 1;
 		for($_POST['input'][$i];$i <= $nb_q;$i++)
 		{
-			$points = $_SESSION['points'][$id_quiz];
+			$points = $_SESSION['points'];
 			$id_quest = $i;
 
 			// Reprise de la requête [[Requête 4]]
@@ -115,14 +120,15 @@ if(!empty($_POST['id_quiz']))
 
 		}
 		$_SESSION['fin'] = 1;
-		$score_final = $_SESSION['points'][$id_quiz];
+		$score_final = $_SESSION['points'];
 		$req_update_score->bindParam('score',$score_final,PDO::PARAM_INT);
 		$req_update_score->execute();
-		//header('Location: ../correction.php?quiz='.$id_quiz);
+		header('Location: ../correction.php?quiz='.$id_quiz);
 	}
 	else
 	{
 		header('Location: ../quiz.php?quiz='.$id_quiz.'&erreur=2');
+		$req_delete->execute();
 	}
 }
 else
